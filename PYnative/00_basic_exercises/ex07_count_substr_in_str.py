@@ -3,6 +3,7 @@
 # Import modules.
 
 import custom_module_clear_screen
+import sys
 
 # Define functions.
 
@@ -21,6 +22,8 @@ def count_word_in_sentence(fn_word,fn_sentence):
     print(f"Sentence: {fn_sentence}")
     if count == 0:
         print(f"The word {fn_word} is not present in the sentence.\n")
+    elif count == 1:
+        print(f"The word {fn_word} appeared {count} time in the sentence.\n")
     else:
         print(f"The word {fn_word} appeared {count} times in the sentence.\n")
     return None
@@ -33,7 +36,13 @@ def main():
     It then counts no. of occurrences of the word in the sentence.
     ''')
     sentence = input("Enter the sentence: ")
+    if sentence == "":
+        print("As no sentence is entered, nothing to do further. Exiting script!\n")
+        sys.exit(1)
     word = input("Enter the word: ")
+    if word == "":
+        print("As no word is entered, nothing to search in the sentence. Exiting script!\n")
+        sys.exit(1)
     print()
     count_word_in_sentence(word,sentence)
     print()
