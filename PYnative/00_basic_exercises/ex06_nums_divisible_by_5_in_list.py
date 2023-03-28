@@ -26,9 +26,10 @@ def accept_nums(fn_count):
     fn_numlist = []
     while index < fn_count:
         try:
-            num = float(input("Enter number: "))
+            #num = float(input("Enter number: "))  # Notes at bottom.
+            num = int(input("Enter number: "))
         except ValueError:
-            print("Invalid input. Please enter a number only. Exiting script!\n")
+            print("Invalid input. Please enter an int non-decimal num. Exit script!\n")
             sys.exit(1)
         fn_numlist.append(num)
         index = index + 1
@@ -67,3 +68,13 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# Notes:
+# We say x is divisible by y if the quotient is a whole number.
+# A whole num is a anum without fraction.
+# Whole nums include 0 and all positive integers.
+# If x is a float num and y is a whole num, then quotient will be a float num (decimal num).
+# If quotient is a decimal num, which means a fraction, we say x is not divisible by y.
+# When we know all decimal nums will give quotient as a fraction, we won't accept it as
+# input, because we want to narrow down to whole nums only in quotient, to prove
+# divisibility.
