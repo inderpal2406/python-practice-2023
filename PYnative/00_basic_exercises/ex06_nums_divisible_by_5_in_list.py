@@ -71,7 +71,7 @@ if __name__ == "__main__":
 
 # Notes:
 # We say x is divisible by y if the quotient is a whole number.
-# A whole num is a anum without fraction.
+# A whole num is a num without fraction.
 # Whole nums include 0 and all positive integers.
 # If x is a float num and y is a whole num, then quotient will be a float num (decimal num).
 # If quotient is a decimal num, which means a fraction, we say x is not divisible by y.
