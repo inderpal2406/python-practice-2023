@@ -103,6 +103,7 @@ def main():
             """)
         elif InvestmentChoice == 2:
             print("\nThis calculation will be based on monthly investments started in Apr every year, when financial year starts.")
+            print("This calculation is also based on consideration that monthly investment is done in first 5 days of the month.")
             StartYear, InvestmentDuration, InvestmentAmount = AcceptInputs("monthly")
             ValidateInputs(StartYear,InvestmentDuration,InvestmentAmount,"monthly")
             EndYear = StartYear + InvestmentDuration
