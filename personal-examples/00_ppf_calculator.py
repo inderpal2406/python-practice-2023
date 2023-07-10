@@ -21,6 +21,27 @@ def ValidateInputs(FnStartYear,FnInvestmentDuration,FnInvestmentAmount,FnInvestm
     elif FnInvestmentChoice == "monthly" and FnInvestmentAmount not in range(1,12501,1):
         print("\nEntered monthly investment amount should be between 1 to 12500. Exiting script!\n")
         sys.exit(1)
+    elif FnInvestmentChoice not in ["yearly","monthly"]:
+        print("Function ValidateInputs() accepts last argument as 'yearly' or 'monthly' strings only. Exiting script!\n")
+        sys.exit(1)
+
+def AcceptInputs(FnInvestmentChoice):
+    """Function to accept user inputs"""
+    try:
+        FnStartYear = int(input("Enter start year [1970 to 2070]: "))
+        FnInvestmentDuration = int(input("Enter tenure in years [Min 15, thereafter 20,25,30...70]: "))
+        if FnInvestmentChoice == "yearly":
+            FnInvestmentAmount = int(input("Enter yearly investment amount [Max 150000]: "))
+        elif FnInvestmentChoice == "monthly":
+            FnInvestmentAmount = int(input("Enter monthly investment amount [Max 12500, which is Max 150000 in 1 year]: "))
+        else:
+            print("Function AcceptInputs() accepts input as 'yearly' or 'monthly' strings only. Exiting script!\n")
+            sys.exit(1)
+    except ValueError:
+        print("\nInvalid input. Please provide integer value only for above 3 inputs. Exiting script!\n")
+        sys.exit(1)
+    # Return multiple values as tuple.
+    return FnStartYear, FnInvestmentDuration, FnInvestmentAmount  # OR return (FnStartYear,FnInvestmentDuration,FnInvestmentAmount)
 
 def main():
     """First function to be called"""
@@ -42,13 +63,7 @@ def main():
             sys.exit(1)
         if InvestmentChoice == 1:
             print("\nThis calculation will be based on investments done in Apr every year, when financial year starts.")
-            try:
-                StartYear = int(input("Enter start year [1970 to 2070]: "))
-                InvestmentDuration = int(input("Enter tenure in years [Min 15, thereafter 20,25,30...70]: "))
-                InvestmentAmount = int(input("Enter yearly investment amount [Max 150000]: "))
-            except ValueError:
-                print("\nInvalid input. Please provide integer value only for above 3 inputs. Exiting script!\n")
-                sys.exit(1)
+            StartYear, InvestmentDuration, InvestmentAmount = AcceptInputs("yearly")
             ValidateInputs(StartYear,InvestmentDuration,InvestmentAmount,"yearly")
             EndYear = StartYear + InvestmentDuration
             TotalInvestment = InvestmentAmount * InvestmentDuration
@@ -78,13 +93,7 @@ def main():
             """)
         elif InvestmentChoice == 2:
             print("\nThis calculation will be based on monthly investments started in Apr every year, when financial year starts.")
-            try:
-                StartYear = int(input("Enter start year [1970 to 2070]: "))
-                InvestmentDuration = int(input("Enter tenure in years [Min 15, thereafter 20,25,30...70]: "))
-                InvestmentAmount = int(input("Enter monthly investment amount [Max 12500, which is Max 150000 in 1 year]: "))
-            except ValueError:
-                print("\nInvalid input. Please provide integer value only for above 3 inputs. Exiting script!\n")
-                sys.exit(1)
+            StartYear, InvestmentDuration, InvestmentAmount = AcceptInputs("monthly")
             ValidateInputs(StartYear,InvestmentDuration,InvestmentAmount,"monthly")
             EndYear = StartYear + InvestmentDuration
             TotalInvestment = InvestmentAmount * 12 * InvestmentDuration
