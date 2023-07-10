@@ -9,6 +9,14 @@ import custom_module_clear_screen
 
 def ValidateInputs(FnStartYear,FnInvestmentDuration,FnInvestmentAmount,FnInvestmentChoice):
     """Function to validate user provided inputs"""
+    # Validate function argument value.
+    if FnInvestmentChoice not in ["yearly","monthly"]:
+        print("""
+        Invalid argument provided to the function ValidateInput() in the script.
+        It only accepts value as 'yearly' or 'monthly' for the argument key FnInvestmentChoice.
+        Exiting script!
+        """)
+        sys.exit(1)
     if FnStartYear not in range(1970,2071,1):
         print("\nEntered start year should be between 1970 to 2070. Exiting script!\n")
         sys.exit(1)
@@ -21,22 +29,24 @@ def ValidateInputs(FnStartYear,FnInvestmentDuration,FnInvestmentAmount,FnInvestm
     elif FnInvestmentChoice == "monthly" and FnInvestmentAmount not in range(1,12501,1):
         print("\nEntered monthly investment amount should be between 1 to 12500. Exiting script!\n")
         sys.exit(1)
-    elif FnInvestmentChoice not in ["yearly","monthly"]:
-        print("Function ValidateInputs() accepts last argument as 'yearly' or 'monthly' strings only. Exiting script!\n")
-        sys.exit(1)
 
 def AcceptInputs(FnInvestmentChoice):
     """Function to accept user inputs"""
+    # Validate function argument value.
+    if FnInvestmentChoice not in ["yearly","monthly"]:
+        print("""
+        Invalid argument provided to the function AcceptInputs() in the script.
+        It only accepts value as 'yearly' or 'monthly' for the argument key FnInvestmentChoice.
+        Exiting script!
+        """)
+        sys.exit(1)
     try:
         FnStartYear = int(input("Enter start year [1970 to 2070]: "))
         FnInvestmentDuration = int(input("Enter tenure in years [Min 15, thereafter 20,25,30...70]: "))
         if FnInvestmentChoice == "yearly":
             FnInvestmentAmount = int(input("Enter yearly investment amount [Max 150000]: "))
-        elif FnInvestmentChoice == "monthly":
-            FnInvestmentAmount = int(input("Enter monthly investment amount [Max 12500, which is Max 150000 in 1 year]: "))
         else:
-            print("Function AcceptInputs() accepts input as 'yearly' or 'monthly' strings only. Exiting script!\n")
-            sys.exit(1)
+            FnInvestmentAmount = int(input("Enter monthly investment amount [Max 12500, which is Max 150000 in 1 year]: "))
     except ValueError:
         print("\nInvalid input. Please provide integer value only for above 3 inputs. Exiting script!\n")
         sys.exit(1)
