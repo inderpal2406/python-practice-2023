@@ -7,7 +7,7 @@ import custom_module_clear_screen
 
 # Define functions.
 
-def ValidateInputs(FnStartYear,FnInvestmentDuration,FnInvestmentAmount):
+def ValidateInputs(FnStartYear,FnInvestmentDuration,FnInvestmentAmount,FnInvestmentChoice):
     """Function to validate user provided inputs"""
     if FnStartYear not in range(1970,2071,1):
         print("\nEntered start year should be between 1970 to 2070. Exiting script!\n")
@@ -15,8 +15,11 @@ def ValidateInputs(FnStartYear,FnInvestmentDuration,FnInvestmentAmount):
     elif FnInvestmentDuration not in range(15,71,5):
         print("\nEntered tenure should be between 15 to 70 as a multiple of 5. Exiting script!\n")
         sys.exit(1)
-    elif FnInvestmentAmount not in range(1,150000,1):
-        print("\nEntered investment amount should be between 1 to 150000. Exiting script!\n")
+    elif FnInvestmentChoice == "yearly" and FnInvestmentAmount not in range(1,150001,1):
+        print("\nEntered yearly investment amount should be between 1 to 150000. Exiting script!\n")
+        sys.exit(1)
+    elif FnInvestmentChoice == "monthly" and FnInvestmentAmount not in range(1,12501,1):
+        print("\nEntered monthly investment amount should be between 1 to 12500. Exiting script!\n")
         sys.exit(1)
 
 def main():
@@ -46,7 +49,7 @@ def main():
             except ValueError:
                 print("\nInvalid input. Please provide integer value only for above 3 inputs. Exiting script!\n")
                 sys.exit(1)
-            ValidateInputs(StartYear,InvestmentDuration,InvestmentAmount)
+            ValidateInputs(StartYear,InvestmentDuration,InvestmentAmount,"yearly")
             EndYear = StartYear + InvestmentDuration
             TotalInvestment = InvestmentAmount * InvestmentDuration
             ROI = 7.1
@@ -62,19 +65,56 @@ def main():
             GrowthInMoney = BalAmount - TotalInvestment
             GrowthInPercentage = round((GrowthInMoney / TotalInvestment) * 100, 2)
             print(f"""
-            Investment started in the year          : {StartYear}
-            Investment duration/tenure              : {InvestmentDuration} years
-            Investment ended in the year            : {EndYear}
-            Investment done in each year            : {InvestmentAmount}
-            Total investment done over the years    : {TotalInvestment}
-            PPF rate of interest                    : {ROI}%p.a.
-            Maturity amount                         : {BalAmount}
-            Growth happened in money                : {GrowthInMoney}
-            Growth expressed in percentage          : {GrowthInPercentage}%
+            Investment started in Apr of the year       : {StartYear}
+            Investment duration/tenure                  : {InvestmentDuration} years
+            End year of the investment tenure           : {EndYear}
+            Investment done in each year                : {InvestmentAmount}
+            Total investment done over the years        : {TotalInvestment}
+            PPF rate of interest                        : {ROI}%p.a.
+            Maturity amount in Mar end of the end year  : {BalAmount}
+            Growth happened in money                    : {GrowthInMoney}
+            Growth expressed in percentage              : {GrowthInPercentage}%
             *** Note: The maturity amount will change if ROI gets revised by govt in any quarter. ***
             """)
         elif InvestmentChoice == 2:
-            pass
+            print("\nThis calculation will be based on monthly investments started in Apr every year, when financial year starts.")
+            try:
+                StartYear = int(input("Enter start year [1970 to 2070]: "))
+                InvestmentDuration = int(input("Enter tenure in years [Min 15, thereafter 20,25,30...70]: "))
+                InvestmentAmount = int(input("Enter monthly investment amount [Max 12500, which is Max 150000 in 1 year]: "))
+            except ValueError:
+                print("\nInvalid input. Please provide integer value only for above 3 inputs. Exiting script!\n")
+                sys.exit(1)
+            ValidateInputs(StartYear,InvestmentDuration,InvestmentAmount,"monthly")
+            EndYear = StartYear + InvestmentDuration
+            TotalInvestment = InvestmentAmount * 12 * InvestmentDuration
+            ROI = 7.1
+            BalAmount = 0  # Initial balance is considered as 0 when PPF account is opened.
+            Iteration = InvestmentDuration
+            while Iteration != 0:
+                TotalInterestForYear = 0
+                for i in range(1,13,1):
+                    Principal = InvestmentAmount + BalAmount
+                    Interest = (Principal * ROI)/1200  # calculate for one month where n=1/12 in (pnr)/100
+                    TotalInterestForYear = TotalInterestForYear + Interest
+                    BalAmount = Principal
+                BalAmount = BalAmount + TotalInterestForYear
+                Iteration = Iteration - 1
+            BalAmount = int(BalAmount)
+            GrowthInMoney = BalAmount - TotalInvestment
+            GrowthInPercentage = round((GrowthInMoney / TotalInvestment) * 100, 2)
+            print(f"""
+            Investment started in Apr of the year       : {StartYear}
+            Investment duration/tenure                  : {InvestmentDuration} years
+            Investment ended in Mar of the year         : {EndYear}
+            Investment done in each month               : {InvestmentAmount}
+            Total investment done over the years        : {TotalInvestment}
+            PPF rate of interest                        : {ROI}%p.a.
+            Maturity amount in Mar end of the end year  : {BalAmount}
+            Growth happened in money                    : {GrowthInMoney}
+            Growth expressed in percentage              : {GrowthInPercentage}%
+            *** Note: The maturity amount will change if ROI gets revised by govt in any quarter. ***
+            """)
         else:
             print("\nInvalid input. Please enter the numbers 1 or 2 only. Exiting script!\n")
             sys.exit(1)
