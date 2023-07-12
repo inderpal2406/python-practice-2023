@@ -7,25 +7,45 @@ import custom_module_clear_screen
 
 # Define functions.
 
+def mmtomile(fnNoOfUnits):
+    """Function to convert mm to mile"""
+    fnKmLength = mmtokm(fnNoOfUnits)
+    fnMileLength = fnKmLength / 1.61
+    fnMileLength = round(fnMileLength,2)
+    return fnMileLength
+
+def mmtokm(fnNoOfUnits):
+    """Function to convert mm to km"""
+    fnMLength = mmtom(fnNoOfUnits)
+    fnKmLength = fnMLength / 1000
+    fnKmLength = round(fnKmLength,2)
+    return fnKmLength
+
+def mmtom(fnNoOfUnits):
+    """Function to convert mm to m"""
+    fnMLength = fnNoOfUnits / 1000
+    fnMLength = round(fnMLength,2)
+    return fnMLength
+
 def mmToft(fnNoOfUnits):
     """Function to convert mm to ft"""
-    cmLength = fnNoOfUnits / 10   # convert to cm
-    answer = cmLength / 30.48     # convert to ft
-    answer = round(answer,2)
-    print(f"{fnNoOfUnits} mm = {answer} ft")
+    fnCmLength = mmTocm(fnNoOfUnits)   # convert to cm
+    fnFtLength = fnCmLength / 30.48     # convert to ft
+    fnFtLength = round(fnFtLength,2)
+    return fnFtLength
 
 def mmToin(fnNoOfUnits):
     """Function to convert mm to inch"""
-    cmLength = fnNoOfUnits / 10   # convert to cm
-    answer = cmLength / 2.54      # convert to in
-    answer = round(answer,2)
-    print(f"{fnNoOfUnits} mm = {answer} in")
+    fnCmLength = mmTocm(fnNoOfUnits)   # convert to cm
+    fnInLength = fnCmLength / 2.54      # convert to in
+    fnInLength = round(fnInLength,2)
+    return fnInLength
 
 def mmTocm(fnNoOfUnits):
     """Function to convert mm to cm"""
-    answer = fnNoOfUnits / 10
-    answer = round(answer,2)
-    print(f"{fnNoOfUnits} mm = {answer} cm")
+    fnCmLength = fnNoOfUnits / 10
+    fnCmLength = round(fnCmLength,2)
+    return fnCmLength
 
 def performLengthConversion(fnFirstChoice,fnSecondChoice,fnNoOfUnits):
     """Function to perform inter-conversion between units of length"""
@@ -33,11 +53,23 @@ def performLengthConversion(fnFirstChoice,fnSecondChoice,fnNoOfUnits):
         if fnSecondChoice == 1:
             print(f"{fnNoOfUnits} mm = {fnNoOfUnits} mm")
         elif fnSecondChoice == 2:
-            mmTocm(fnNoOfUnits)
+            cmLength = mmTocm(fnNoOfUnits)
+            print(f"{fnNoOfUnits} mm = {cmLength} cm")
         elif fnSecondChoice == 3:
-            mmToin(fnNoOfUnits)
+            inLength = mmToin(fnNoOfUnits)
+            print(f"{fnNoOfUnits} mm = {inLength} in")
         elif fnSecondChoice == 4:
-            mmToft(fnNoOfUnits)
+            ftLength = mmToft(fnNoOfUnits)
+            print(f"{fnNoOfUnits} mm = {ftLength} ft")
+        elif fnSecondChoice == 5:
+            mLength = mmtom(fnNoOfUnits)
+            print(f"{fnNoOfUnits} mm = {mLength} m")
+        elif fnSecondChoice == 6:
+            kmLength = mmtokm(fnNoOfUnits)
+            print(f"{fnNoOfUnits} mm = {kmLength} km")
+        else:
+            mileLength = mmtomile(fnNoOfUnits)
+            print(f"{fnNoOfUnits} mm = {mileLength} mile")
 
 def validateInputs(fnFirstChoice,fnSecondChoice,fnNoOfUnits):
     """Function to validate user inputs regarding units"""
