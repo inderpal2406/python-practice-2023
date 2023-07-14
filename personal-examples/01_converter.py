@@ -7,6 +7,40 @@ import custom_module_clear_screen
 
 # Define functions.
 
+def intomile(fnNoOfUnits):
+    """Function to convert in to mile"""
+    fnKmLength = intokm(fnNoOfUnits)
+    fnMileLength = fnKmLength / 1.61
+    return round(fnMileLength,2)
+
+def intokm(fnNoOfUnits):
+    """Function to convert in to km"""
+    fnCmLength = intocm(fnNoOfUnits)
+    fnKmLength = cmtokm(fnCmLength)
+    return round(fnKmLength,2)
+
+def intom(fnNoOfUnits):
+    """Function to convert in to m"""
+    fnCmLength = intocm(fnNoOfUnits)
+    fnMLength = fnCmLength / 100
+    return round(fnMLength,2)
+
+def intoft(fnNoOfUnits):
+    """Function to convert in to ft"""
+    fnCmLength = intocm(fnNoOfUnits)
+    fnFtLength = fnCmLength / 30.48
+    return round(fnFtLength,2)
+
+def intocm(fnNoOfUnits):
+    """Function to convert in to cm"""
+    fnCmLength = fnNoOfUnits * 2.54
+    return round(fnCmLength,2)
+
+def intomm(fnNoOfUnits):
+    """Function to convert in to mm"""
+    fnMmLength = fnNoOfUnits * 2.54 * 10
+    return round(fnMmLength,2)
+
 def cmtomile(fnNoOfUnits):
     """Function to convert cm to mile"""
     fnKmLength = cmtokm(fnNoOfUnits)
@@ -126,6 +160,27 @@ def performLengthConversion(fnFirstChoice,fnSecondChoice,fnNoOfUnits):
         else:
             mileLength = cmtomile(fnNoOfUnits)
             print(f"{fnNoOfUnits} cm = {mileLength} mile")
+    elif fnFirstChoice == 3:
+        if fnSecondChoice == 1:
+            mmLength = intomm(fnNoOfUnits)
+            print(f"{fnNoOfUnits} in = {mmLength} mm")
+        elif fnSecondChoice == 2:
+            cmLength = intocm(fnNoOfUnits)
+            print(f"{fnNoOfUnits} in = {cmLength} cm")
+        elif fnSecondChoice == 3:
+            print(f"{fnNoOfUnits} in = {fnNoOfUnits} in")
+        elif fnSecondChoice == 4:
+            ftLength = intoft(fnNoOfUnits)
+            print(f"{fnNoOfUnits} in = {ftLength} ft")
+        elif fnSecondChoice == 5:
+            mLength = intom(fnNoOfUnits)
+            print(f"{fnNoOfUnits} in = {mLength} m")
+        elif fnSecondChoice == 6:
+            kmLength = intokm(fnNoOfUnits)
+            print(f"{fnNoOfUnits} in = {kmLength} km")
+        else:
+            mileLength = intomile(fnNoOfUnits)
+            print(f"{fnNoOfUnits} in = {mileLength} mile")
 
 def validateInputs(fnFirstChoice,fnSecondChoice,fnNoOfUnits):
     """Function to validate user inputs regarding units"""
