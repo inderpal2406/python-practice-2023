@@ -61,10 +61,10 @@ def main():
     else:
         our_dict = dict_three
     score = play_game(our_dict)
-    if score == 5:
-        print("Congratulations! You've scored 5/5.\n")
+    if score == len(our_dict):
+        print(f"Congratulations! You've scored {score}/{len(our_dict)}.\n")
     else:
-        print(f"You've scored {score}/5. Better luck next time!\n")
+        print(f"You've scored {score}/{len(our_dict)}. Better luck next time!\n")
     second_choice = input("Do you want to see the correct answers? [y|n]: ")
     if second_choice.lower() == "y":
         for key in our_dict:
