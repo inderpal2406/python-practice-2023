@@ -43,18 +43,16 @@ def main():
     """)
     input()  # Read the ENTER key.
     secret_word, secret_hint = generate_secret_word_and_hint()
-    #fruits = ["mango","apple","grapes"]
-    #secret_word = random.choice(fruits)
+    # Create 2 lists. One with letters from secret_word & other with
+    # _ equal to no. of letters in secret_word.
     secret_word_list = []
-    for i in secret_word:
-        secret_word_list.append(i)
-    #hint = "fruit"
-    print(f"Guess the word! HINT: word is name of a {secret_hint}.")
     guessed_word_list = []
-    for i in secret_word:
+    for letter in secret_word:
+        secret_word_list.append(letter)
         guessed_word_list.append("_")
-    for i in guessed_word_list:
-        print(f"{i}",end=" ")
+    print(f"Guess the word! HINT: word is name of a {secret_hint}.")
+    for element in guessed_word_list:
+        print(f"{element}",end=" ")
     print()  # Bring cursor to new line after the above loop.
     max_tries = len(secret_word) + 2
     print(f"You have maximum {max_tries} tries to guess all the {len(secret_word)} letters as indicated by _ above.\n")
@@ -66,9 +64,11 @@ def main():
             index = secret_word_list.index(user_guess)
             guessed_word_list.insert(index,user_guess)
             guessed_word_list.pop(index+1)
-            for i in guessed_word_list:
-                print(f"{i}",end=" ")
+            for element in guessed_word_list:
+                print(f"{element}",end=" ")
             print()  # Bring cursor to new line after the above loop.
+            # secret_word_list's element is also popped to mitigate issue of duplicate
+            # letters in same word.
             secret_word_list.insert(index,"_")
             secret_word_list.pop(index+1)
         count = count + 1
@@ -80,8 +80,8 @@ def main():
     else:
         print(f"\nThe word was: {secret_word}")
         print("You've exhausted all the tries. Better luck next time!\n")
-    #print(f"secret word list: {secret_word_list}")
-    #print(f"guessed word list: {guessed_word_list}")
+
+# Call main() when the script is executed.
 
 if __name__ == "__main__":
     main()
