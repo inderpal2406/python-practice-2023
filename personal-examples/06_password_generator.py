@@ -3,7 +3,7 @@
 # Import modules.
 
 import random
-import time
+#import time
 import custom_module_clear_screen
 
 # Define functions.
@@ -84,18 +84,23 @@ def main():
             print(f"Random password generated is: {password}")
             break
         else:
-            # After multiple iterations of the script, a time comes when script goes for 
-            # next iteration continuously. I thought that maybe same random charlist is 
+            # After multiple iterations of the script, a time comes when script goes for
+            # next iteration continuously. I thought that maybe same random charlist is
             # being generated each time due to which this is happening. This could be
             # related to random module giving same values due to some issue. So, used
-            # setstate() method from random module. But this method requires an 
+            # setstate() method from random module. But this method requires an
             # argument to be passed. That arg is a state. We didn't try that.
             # I though that maybe introducing a time gap would make random generate random
-            # values. But it is also behaving in the same way of continuous iterations. 
+            # values. But it is also behaving in the same way of continuous iterations.
             #random.setstate()
-            print("Going for next iteration.")
-            print(char_list)  # In output same charlist is getting generated in each iteration.
+            #print("Going for next iteration.")
+            #print(char_list)  # In output same charlist is getting generated in each iteration.
             #time.sleep(1)
+            # Above behavior was because of the count variable not being initialized
+            # as fresh in next iteration due to continue statement below. Due to this,
+            # it didn't enter the inner while loop and charlist remained same due to which
+            # we saw infinite loops. So, count was brought inside the outer while loop.
+            # More explanantion in lines on top.
             continue
 
 # Call main() when the script is executed.
