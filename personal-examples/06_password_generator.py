@@ -47,20 +47,39 @@ def main():
         # their values from last iteration.
         success1 = False
         success2 = False
+        success3 = False
+        success4 = False
         while count < no_of_chars:
             random_num = random.randint(33,126)
             our_char = chr(random_num)
             char_list.append(our_char)
             count = count + 1
+        # Check if generated random password  has atleast 1 capital letter.
         for char in char_list:
             if ord(char) in range(65,91,1):
                 success1 = True
                 break
+        # Check if generated random password  has atleast 1 small letter.
         for char in char_list:
             if ord(char) in range(97,123,1):
                 success2 = True
                 break
-        if success1 and success2:
+        # Check if generated random password  has atleast 1 numeric digit.
+        for char in char_list:
+            if ord(char) in range(48,58,1):
+                success3 = True
+                break
+        # Check if generated random password  has atleast 1 special character.
+        for char in char_list:
+            # Combining multiple conditional statement using OR as the ASCII
+            # code for the special characters is not in continuous range.
+            if ord(char) in range(33,48,1) or \
+            ord(char) in range(58,65,1) or \
+            ord(char) in range(91,97,1) or \
+            ord(char) in range(123,127,1):
+                success4 = True
+                break
+        if success1 and success2 and success3 and success4:
             password = "".join(char_list)
             print(f"Random password generated is: {password}")
             break
