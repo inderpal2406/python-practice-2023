@@ -73,6 +73,9 @@ def load_RSS_feed():
 def main():
     """First function to be called"""
     rss_data = load_RSS_feed()
+    # For XML parsing:
+    # https://www.geeksforgeeks.org/xml-parsing-python/
+    
     #newsitems = parse_XML(rss_data)
 
 # Call main() when the script is executed.
