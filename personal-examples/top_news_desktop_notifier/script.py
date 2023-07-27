@@ -9,6 +9,7 @@
 # Import modules.
 
 import requests  # First install requests using pip.
+import xml.etree.ElementTree as ET
 
 # Initiate variables with global scope.
 
@@ -68,14 +69,19 @@ def load_RSS_feed():
     file_object = open(filename,"wb")
     file_object.write(response.content)
     file_object.close()
-    return response.content
+    #return response.content  # Needs to be uncommented at the end.
+    filename2 = ".\\testdata.xml"
+    tree = ET.parse(filename2)
+    root = tree.getroot()
+    print(root.tag, root.attrib)
+    for child in root:
+        print(child.tag, child.attrib)
 
 def main():
     """First function to be called"""
     rss_data = load_RSS_feed()
     # For XML parsing:
     # https://www.geeksforgeeks.org/xml-parsing-python/
-    
     #newsitems = parse_XML(rss_data)
 
 # Call main() when the script is executed.
