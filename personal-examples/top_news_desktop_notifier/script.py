@@ -71,11 +71,11 @@ def load_RSS_feed():
     file_object.close()
     #return response.content  # Needs to be uncommented at the end.
     filename2 = ".\\testdata.xml"
-    tree = ET.parse(filename2)
+    tree = ET.parse(filename)
     root = tree.getroot()
     print(root.tag, root.attrib)
-    for child in root:
-        print(child.tag, child.attrib)
+    #for child in root:
+    #   print(child.tag, child.attrib)
 
 def main():
     """First function to be called"""
