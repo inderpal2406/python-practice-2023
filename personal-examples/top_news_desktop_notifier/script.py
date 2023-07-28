@@ -74,8 +74,10 @@ def load_RSS_feed():
     tree = ET.parse(filename)
     root = tree.getroot()
     print(root.tag, root.attrib)
-    #for child in root:
-    #   print(child.tag, child.attrib)
+    for child in root:
+       print(child.tag)
+       for grandchild in child:
+            print(grandchild.tag)
 
 def main():
     """First function to be called"""
